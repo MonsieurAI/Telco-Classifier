@@ -1,13 +1,13 @@
 import pandas as pd
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.pipeline import Pipeline
-from preprocess import load_and_clean_data, load_preprocessor
+from preprocess import load_train, load_preprocessor
 import xgboost as xgb
 from scipy.stats import uniform
 import json
 
 # Get data
-X, y = load_and_clean_data()
+X, y = load_train()
 preprocessor = load_preprocessor(X)
 
 # Build the pipeline
