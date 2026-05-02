@@ -8,8 +8,11 @@ def clean(data):
     data = data.drop(['customerID','gender','PhoneService'], axis=1)
 
     data['SeniorCitizen'] = data['SeniorCitizen'].map({1:'Yes', 0:'No'})
-    data = data[data['TotalCharges'] != ' ']
-    data['TotalCharges'] = data['TotalCharges'].astype(float)
+
+    # Replace empty "TotalCharges" values with "MonthlyCharges" * "tenure"
+    calculated_total_charges = data['MonthlyCharges'] * data['tenure']
+    data['TotalCharges'] = pd.to_numeric(data['TotalCharges'],errors='coerce').fillna(calculated_total_charges)
+
     data = data.reset_index(drop=True)
 
     X = data.drop('Churn', axis=1)
