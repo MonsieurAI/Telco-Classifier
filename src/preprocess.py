@@ -7,13 +7,13 @@ def clean(data):
     # Drop statistically unnecessary "gender" and "PhoneService" columns
     data = data.drop(['customerID','gender','PhoneService'], axis=1)
 
-    data['SeniorCitizen'] = data['SeniorCitizen'].apply(lambda x: 'Yes' if x == 1 else 'No')
+    data['SeniorCitizen'] = data['SeniorCitizen'].map({1:'Yes', 0:'No'})
     data = data[data['TotalCharges'] != ' ']
     data['TotalCharges'] = data['TotalCharges'].astype(float)
     data = data.reset_index(drop=True)
 
     X = data.drop('Churn', axis=1)
-    y = data['Churn'].apply(lambda x: 1 if x == 'Yes' else 0)
+    y = data['Churn'].map({'Yes':1, 'No':0})
     return X,y
 
 def load_train():
