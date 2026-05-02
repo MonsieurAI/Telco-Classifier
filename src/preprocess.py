@@ -3,7 +3,10 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler,OneHotEncoder
 
 def clean(data):
-    data = data.drop(['customerID'], axis=1)
+    # Drop id column
+    # Drop statistically unnecessary "gender" and "PhoneService" columns
+    data = data.drop(['customerID','gender','PhoneService'], axis=1)
+
     data['SeniorCitizen'] = data['SeniorCitizen'].apply(lambda x: 'Yes' if x == 1 else 'No')
     data = data[data['TotalCharges'] != ' ']
     data['TotalCharges'] = data['TotalCharges'].astype(float)
