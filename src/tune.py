@@ -5,6 +5,7 @@ from preprocess import load_train, load_preprocessor
 import xgboost as xgb
 from scipy.stats import uniform
 import json
+from paths import TUNING_BEST_PATH,TUNING_RESULTS_PATH
 
 # Get data
 X, y = load_train()
@@ -35,6 +36,6 @@ print('Parameters:')
 print(best_params)
 
 # Save all and the best results
-results.to_csv('../data/tuning_results.csv')
-with open('../data/tuning_best.json', 'w') as file:
+results.to_csv(TUNING_RESULTS_PATH)
+with open(TUNING_BEST_PATH, 'w') as file:
     json.dump(best_params, file)

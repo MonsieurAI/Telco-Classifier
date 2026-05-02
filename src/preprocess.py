@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler,OneHotEncoder
+from paths import RAW_TRAIN_PATH,RAW_TEST_PATH
 
 def clean(data):
     # Drop id column
@@ -20,12 +21,12 @@ def clean(data):
     return X,y
 
 def load_train():
-    train = pd.read_csv('../data/raw-train.csv')
+    train = pd.read_csv(RAW_TRAIN_PATH)
     X,y = clean(train)
     return X,y
 
 def load_test():
-    test = pd.read_csv('../data/raw-test.csv')
+    test = pd.read_csv(RAW_TEST_PATH)
     X,y = clean(test)
     return X,y
 
